@@ -59,8 +59,16 @@ function render() {
   }
 
   messaggio.textContent = frase
-
   info.textContent = `Totali: ${totali} · Completati: ${completati}`
+
+  azioni.innerHTML = completati > 0
+  ? `<button id="pulisci">Elimina completati (${completati})</button>`
+  : ""
+
+  const pulisci = document.querySelector("#pulisci")
+  if (pulisci) {
+    pulisci.addEventListener("click", deleteCompletati)
+  }
 }
 
 function renderBenvenuto() {
