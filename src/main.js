@@ -107,6 +107,13 @@ function deleteTask(id) {
   aggiornaStato(tasks.filter(t => t.id !== id))
 }
 
+function deleteCompletati() {
+  if (!confirm("Elimino tutti i task completati?")) return
+  tasks = tasks.filter(t => !t.completed)   // tengo i non completati
+  salvaStato()
+  render()
+}
+
 /* ================= 6. EVENTI ================= */
 form.addEventListener("submit", (evento) => {
   evento.preventDefault()
