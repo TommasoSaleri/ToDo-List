@@ -36,7 +36,8 @@ function salvaStato() {
 
 /* ================= 4. VIEW ================= */
 function render() {
-  lista.innerHTML = tasks
+  lista.innerHTML = [...tasks]
+    .sort((a, b) => a.completed - b.completed)
     .map(t => `
       <li class="${t.completed ? "fatto" : ""}" data-id="${t.id}">
         <span class="titolo">${t.title}</span>
