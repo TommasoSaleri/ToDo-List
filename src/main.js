@@ -2,6 +2,7 @@ import "./style.css"
 
 /* ================= 1. STATO ================= */
 const CHIAVE = "todo-tasks"
+const CHIAVE_NOME = "todo-nome"
 
 function caricaStato() {
   const testo = localStorage.getItem(CHIAVE)
@@ -20,7 +21,10 @@ function caricaStato() {
 let tasks = caricaStato()
 
 /* ================= 2. RIFERIMENTI ================= */
+const box = document.querySelector("#benvenuto")
 const lista = document.querySelector("#lista")
+const azioni = document.querySelector("#azioni")
+const messaggio = document.querySelector("#messaggio")
 const info  = document.querySelector("#info")
 const form  = document.querySelector("#form-task")
 const campo = document.querySelector("#campo-task")
@@ -42,7 +46,42 @@ function render() {
     .join("")
 
   const completati = tasks.filter(t => t.completed).length
-  info.textContent = `Totali: ${tasks.length} · Completati: ${completati}`
+  const totali = tasks.length
+  const restanti = totali - completati
+
+  let frase
+  if (totali === 0) {
+    frase = "Non hai task. Buona giornata."
+  } else if (restanti === 0) {
+    frase = "Fatto tutto. Complimenti."
+  } else {
+    frase = `Ti restano ${restanti} task su ${totali}.`
+  }
+
+  messaggio.textContent = frase
+
+  info.textContent = `Totali: ${totali} · Completati: ${completati}`
+}
+
+function renderBenvenuto() {
+  const nome = localStorage.getItem(CHIAVE_NOME)
+
+  if (nome) {
+    box.innerHTML = `<p>Bentornato, ${nome}</p>`
+    return
+  }
+
+  box.innerHTML = `
+    <input type="text" id="campo-nome" placeholder="Come ti chiami?">
+    <button id="salva-nome">Salva</button>
+  `
+
+  document.querySelector("#salva-nome").addEventListener("click", () => {
+    const valore = document.querySelector("#campo-nome").value.trim()
+    if (valore === "") return
+    localStorage.setItem(CHIAVE_NOME, valore)
+    renderBenvenuto()
+  })
 }
 
 /* ================= 5. AZIONI ================= */
@@ -92,3 +131,4 @@ lista.addEventListener("click", (evento) => {
 
 /* ================= 7. AVVIO ================= */
 render()
+renderBenvenuto()
