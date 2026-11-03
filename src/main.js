@@ -63,7 +63,9 @@ function render() {
   info.textContent = `Totali: ${totali} · Completati: ${completati}`
 
   azioni.innerHTML = completati > 0
-  ? `<button id="pulisci">Elimina completati (${completati})</button>`
+  ? `<form id="form-pulisci">
+      <button id="pulisci">Elimina completati (${completati})</button>
+    </form>`
   : ""
 
   const pulisci = document.querySelector("#pulisci")
@@ -81,8 +83,10 @@ function renderBenvenuto() {
   }
 
   box.innerHTML = `
-    <input type="text" id="campo-nome" placeholder="Come ti chiami?">
-    <button id="salva-nome">Salva</button>
+    <form id="form-nome">
+      <input type="text" id="campo-nome" placeholder="Come ti chiami?">
+      <button id="salva-nome">Salva</button>
+    </form>
   `
 
   document.querySelector("#salva-nome").addEventListener("click", () => {

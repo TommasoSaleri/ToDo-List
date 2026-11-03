@@ -16,8 +16,11 @@ main {
 }
 
 h1 {
-  font-size: 22px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
   margin: 0 0 18px;
+  text-align: center;
+  font-style: normal;
 }
 
 form {
@@ -80,4 +83,19 @@ li.fatto .titolo {
   margin: 16px 0 0;
   font-size: 14px;
   color: #666;
+}
+
+#salva-nome {
+  background: #ff7e67  ;
+  color: #fff;
+}
+
+#form-pulisci {
+  margin-top: 18px;
+  justify-content: end;
+}
+
+#pulisci {
+  background: #a33;
+  color: #fff;
 }
